@@ -34,24 +34,3 @@ def occupations():
 
 print occupations()
 
-
-'''
-def convertDict(x):
-    d = {}
-    f = open(x)
-    f.readline()
-    m = f.readline()
-    while m!='':
-        if m[0]=='"':
-            m = m[1:]
-            indexOfEndQuote = m.find('"')
-            currentJob = m[:indexOfEndQuote]
-            d[currentJob] = float(m[indexOfEndQuote + 2:])
-        else:
-            if m[0:5] != 'Total':
-                indexOfComma = m.find(',')
-                currentJob = m[:indexOfComma]
-                d[currentJob] = float(m[indexOfComma + 1:])
-        m = f.readline()
-    return d
-'''
