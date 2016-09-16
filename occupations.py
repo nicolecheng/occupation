@@ -11,8 +11,9 @@ Create a function that returns a randomly selected occupation where the results 
 File this under occupation'''
 
 import csv
+import random
 
-def readCSV(x):
+def convertDict(x):
     d = {}
     f = open(x)
     f.readline()
@@ -20,15 +21,28 @@ def readCSV(x):
     while m!='':
         if m[0]=='"':
             m = m[1:]
-            n = m.index(m,'"') # finds index of second "
+            indexOfEndQuote = m.find('"')
+            currentJob = m[:indexOfEndQuote]
+            d[currentJob] = float(m[indexOfEndQuote + 2:])
         else:
-            n = m.index(m,',')
-        d.addKey(m[0:n])
-        d.addValue(m[n+1])
+            if m[0:5] != 'Total':
+                indexOfComma = m.find(',')
+                currentJob = m[:indexOfComma]
+                d[currentJob] = float(m[indexOfComma + 1:])
         m = f.readline()
-    print d
-
-readCSV("occupations.csv")
+    return d
+def picker(dict):
+    percentage = random.random() * 99.8
+    counter = 0
+    for item in dict:
+        if percentage > dict[item] + counter:
+            counter += dict[item]
+        else:
+            return item
+def occupation():
+    dict = convertDict("occupations.csv")
+    return picker(dict)
+print occupation()
 
 
 # string.index(s, sub[, start[, end]])
